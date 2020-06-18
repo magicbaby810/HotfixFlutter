@@ -67,7 +67,7 @@ import io.flutter.plugin.common.MethodChannel;
  */
 
 
-class AppApplication extends MultiDexApplication {
+public class AppApplication extends MultiDexApplication {
 
 
     @Override
