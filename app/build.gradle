@@ -66,5 +66,57 @@ dependencies {
 
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+}
 
+
+apply plugin: 'hannibal'
+
+import com.hannibal.gradle.utils.MethodLogAdapter
+import org.objectweb.asm.ClassVisitor
+import org.objectweb.asm.MethodVisitor
+import org.objectweb.asm.Opcodes
+
+import org.objectweb.asm.*
+
+hannibal {
+    //下面这个参数仅仅影响log输出，为本次修改命名，无实际意义，不配置也可以
+    hannibalModifyName = 'Hannibal'
+    //设置为true可以显示帮助内容，默认为true
+    showHelp = true
+    //keepQuiet默认为false,为true时不会有字节码修改的log输出，建议为false
+    keepQuiet = false
+    //下面的参数设置为true时会输出工程编译耗时信息
+    watchTimeConsume = true
+
+    //this is the most important part
+    modifyMatchMaps = [
+            'com.idlefish.flutterboost.FlutterBoost': [
+                    ['methodName': 'createEngine', 'methodDesc': '()Lio/flutter/embedding/engine/FlutterEngine;', 'adapter': {
+                        ClassVisitor cv, int access, String name, String desc, String signature, String[] exceptions ->
+                            MethodVisitor methodVisitor = cv.visitMethod(access, name, desc, signature, exceptions);
+                            MethodVisitor adapter = new MethodLogAdapter(methodVisitor) {
+
+                                @Override
+                                void visitLineNumber(int line, Label label) {
+                                    super.visitLineNumber(line, label)
+                                }
+
+                                @Override
+                                void visitCode() {
+                                    super.visitCode();
+                                    Label l9 = new Label()
+                                    methodVisitor.visitLabel(l9)
+                                    methodVisitor.visitLineNumber(329, l9)
+                                    methodVisitor.visitVarInsn(Opcodes.ALOAD, 0)
+                                    methodVisitor.visitMethodInsn(Opcodes.INVOKESTATIC,
+                                            "com/sk/hotfixflutter/FlutterPatch",
+                                            "hook",
+                                            "(Ljava/lang/Object;)V",
+                                            false)
+                                }
+                            }
+                            return adapter
+                    }]
+            ]
+    ]
 }

@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewParent;
 
+import com.idlefish.flutterboost.FlutterBoost;
+import com.idlefish.flutterboost.Platform;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerLoadResult;
 import com.tencent.tinker.lib.util.TinkerLog;
@@ -23,13 +25,12 @@ public class FlutterPatch {
 
     private static final String TAG = "FlutterPatch";
 
-    private static String libPath;
 
     private FlutterPatch() {
     }
 
     public static String getLibPath(Context context) {
-        libPath = findLibraryFromTinker(context, "lib" + File.separator + getCpuABI(), "libapp.so");
+        String libPath = findLibraryFromTinker(context, "lib" + File.separator + getCpuABI(), "libapp.so");
         if (!TextUtils.isEmpty(libPath) && libPath.equals("libapp.so")) {
             return null;
         }
@@ -39,7 +40,7 @@ public class FlutterPatch {
     public static void flutterPatchInit(Context context) {
 
         try {
-            libPath = findLibraryFromTinker(context, "lib" + File.separator + getCpuABI(), "libapp.so");
+            String libPath = findLibraryFromTinker(context, "lib" + File.separator + getCpuABI(), "libapp.so");
 
             FlutterLoader flutterLoader = FlutterLoader.getInstance();
 
@@ -48,6 +49,18 @@ public class FlutterPatch {
             field.set(flutterLoader, libPath);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void hook(Object obj) {
+        if (obj instanceof FlutterBoost) {
+            FlutterBoost flutterBoost = (FlutterBoost) obj;
+            TinkerLog.i(TAG, "FlutterBoost: " + flutterBoost.platform().getApplication());
+
+            flutterPatchInit(flutterBoost.platform().getApplication());
+
+        } else {
+            TinkerLog.i(TAG, "Object: " + obj.getClass().getName());
         }
     }
 

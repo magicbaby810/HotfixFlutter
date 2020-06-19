@@ -157,6 +157,6 @@ public class AppApplication extends MultiDexApplication {
                 .renderMode(FlutterView.RenderMode.texture)
                 .lifecycleListener(boostLifecycleListener)
                 .build();
-        FlutterBoost.instance().init(platform, FlutterPatch.getLibPath(this));
+        FlutterBoost.instance().init(platform);
     }
 }
