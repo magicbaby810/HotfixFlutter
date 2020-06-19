@@ -1,5 +1,17 @@
 ### 混栈开发之Android端Flutter热更新
 
+#### demo运行
+down下来后，先打开flutterhotfixmodule项目，open->HotFixFlutter->flutterhotfixmodule，打开pubspec.yaml，点击Pub get，执行完成。再打开HotFixFlutter，切换到Project下，等待Gradle Sync完成。再把```FlutterBoost.instance().init(platform, FlutterPatch.getLibPath(this));```的参数给传进```createEngine(String libPath)```方法内，在里面把
+ 
+```
+if (!TextUtils.isEmpty(libPath)) {
+    flutterShellArgs.add("--aot-shared-library-name=" + libPath);
+    flutterShellArgs.add("--aot-shared-library-name="
+            + getApplicationInfo(mPlatform.getApplication().getApplicationContext()).nativeLibraryDir
+            + File.separator + libPath);
+}
+```
+
 #### 背景
 [Flutter暂时放弃热更新的官方解释](https://github.com/flutter/flutter/issues/14330#issuecomment-485565194)
 
