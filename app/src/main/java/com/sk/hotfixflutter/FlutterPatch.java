@@ -20,7 +20,10 @@ import java.lang.reflect.Field;
 import io.flutter.embedding.engine.loader.FlutterLoader;
 
 
-
+/**
+ * 在指定位置插桩hook方法
+ * 此类可随意挪动和修改，只需将全类名放到gradle配置里的insertClassFullName
+ */
 public class FlutterPatch {
 
     private static final String TAG = "FlutterPatch";
@@ -52,10 +55,17 @@ public class FlutterPatch {
         }
     }
 
+    /**
+     *
+     * 插桩方法
+     * 此方法不要修改，否则不会成功
+     *
+     * @param obj
+     */
     public static void hook(Object obj) {
         if (obj instanceof FlutterBoost) {
             FlutterBoost flutterBoost = (FlutterBoost) obj;
-            TinkerLog.i(TAG, "FlutterBoost: " + flutterBoost.platform().getApplication());
+            TinkerLog.i(TAG, "find FlutterBoost");
 
             flutterPatchInit(flutterBoost.platform().getApplication());
 
@@ -101,6 +111,11 @@ public class FlutterPatch {
         return libName;
     }
 
+    /**
+     * 获取最优abi
+     *
+     * @return
+     */
     public static String getCpuABI() {
 
         for (String cpu : Build.SUPPORTED_ABIS) {
