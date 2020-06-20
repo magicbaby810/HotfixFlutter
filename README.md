@@ -34,9 +34,15 @@ if (!TextUtils.isEmpty(libPath)) {
 ```
 ### 更新
 未考虑到多人协同开发，下载FlutterBoost都要手动把路径传进去，不太方便。所以改为插桩到
-```FlutterMain.startInitialization(mPlatform.getApplication());```方法后实现，加入hannibal插桩库，根配置添加
+```FlutterMain.startInitialization(mPlatform.getApplication());```方法后实现，加入hannibal插桩库，根配置添加  
 
 ```
+repositories下
+maven { url 'https://dl.bintray.com/magicbaby/maven' }
+
+```
+```
+dependencies下
 classpath 'com.sk.hannibal:hannibal:1.0.1.2'
 ```
   
@@ -53,7 +59,7 @@ hannibal {
 自己的项目可以照着这个配置来，有什么问题可以提issue
 
 ### 感谢
-[带你不到80行代码搞定Flutter热更新](https://cloud.tencent.com/developer/article/1531498	)
+[带你不到80行代码搞定Flutter热更新](https://cloud.tencent.com/developer/article/1531498)
 	
 
 
