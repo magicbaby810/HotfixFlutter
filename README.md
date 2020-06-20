@@ -1,16 +1,6 @@
 ### 混栈开发之Android端Flutter热更新
 
-#### demo运行
-down下来后，先打开flutterhotfixmodule项目，open->HotFixFlutter->flutterhotfixmodule，打开pubspec.yaml，点击Pub get，执行完成。再打开HotFixFlutter，切换到Project下，等待Gradle Sync完成。再把```FlutterBoost.instance().init(platform, FlutterPatch.getLibPath(this));```的参数给传进```createEngine(String libPath)```方法内，在里面把
- 
-```
-if (!TextUtils.isEmpty(libPath)) {
-    flutterShellArgs.add("--aot-shared-library-name=" + libPath);
-    flutterShellArgs.add("--aot-shared-library-name="
-            + getApplicationInfo(mPlatform.getApplication().getApplicationContext()).nativeLibraryDir
-            + File.separator + libPath);
-}
-```
+
 
 #### 背景
 [Flutter暂时放弃热更新的官方解释](https://github.com/flutter/flutter/issues/14330#issuecomment-485565194)
@@ -31,8 +21,40 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 
 
+#### demo运行
+down下来后，先打开flutterhotfixmodule项目，open->HotFixFlutter->flutterhotfixmodule，打开pubspec.yaml，点击Pub get，执行完成。再打开HotFixFlutter，切换到Project下，等待Gradle Sync完成。再把```FlutterBoost.instance().init(platform, FlutterPatch.getLibPath(this));```的参数给传进```createEngine(String libPath)```方法内，在里面把
+ 
+```
+if (!TextUtils.isEmpty(libPath)) {
+    flutterShellArgs.add("--aot-shared-library-name=" + libPath);
+    flutterShellArgs.add("--aot-shared-library-name="
+            + getApplicationInfo(mPlatform.getApplication().getApplicationContext()).nativeLibraryDir
+            + File.separator + libPath);
+}
+```
+### 更新
+未考虑到多人协同开发，下载FlutterBoost都要手动把路径传进去，不太方便。所以改为插桩到
+```FlutterMain.startInitialization(mPlatform.getApplication());```方法后实现，加入hannibal插桩库，根配置添加
 
+```
+classpath 'com.sk.hannibal:hannibal:1.0.1.2'
+```
+  
+在app gradle里配置  
+  
+```  
+apply plugin: 'hannibal'
+	
+hannibal {
+ adjustFlutterBoost = true
+ insertClassFullName = 'com.xxx.xxxxx.FlutterPatch'
+}
+```
+自己的项目可以照着这个配置来，有什么问题可以提issue
 
+### 感谢
+[带你不到80行代码搞定Flutter热更新](https://cloud.tencent.com/developer/article/1531498	)
+	
 
 
 
