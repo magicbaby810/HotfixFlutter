@@ -1,9 +1,6 @@
 ### 混栈开发之Android端Flutter热更新
 
 
-#### 必备
-- 接入Tinker热更新
-- 项目使用Flutter版本v1.17.3，FlutterBoost版本v1.17.1-hotfixes
 
 #### 背景
 [Flutter暂时放弃热更新的官方解释](https://github.com/flutter/flutter/issues/14330#issuecomment-485565194)
@@ -17,6 +14,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 由于Flutter有自己的一套so加载流程，Tinker无法加载到Flutter的补丁so包。分析下Flutter的so加载流程，在FlutterLoader类里可以通过反射字段aotSharedLibraryName把它set进去，这样就可以实现加载补丁so文件，测试Dart代码的修改生效。
 
+#### FlutterBoost
 但是在集成FlutterBoost后，这样就行不通了。因为Flutter的初始化封装在FlutterBoost类里，FlutterBoost里又new了一个FlutterEngine引擎类，传入一个空字符数组的FlutterShellArgs。需要我们把反射方法放在里面的```FlutterMain.startInitialization(mPlatform.getApplication());```方法后执行，或者把补丁so包路径传进来，add到flutterShellArgs里。前一种方法需要反射，性能会有损耗，后一种虽然没什么损耗，只是需要把路径层层传进来，改动有点大。不过FlutterBoost做为模块依赖进来，改动一下也是可以的，测试生效。
 
 #### 结论
@@ -59,7 +57,7 @@ hannibal {
  insertClassFullName = 'com.xxx.xxxxx.FlutterPatch'
 }
 ```
-自己的项目可以照着这个配置来，有什么问题可以提issue
+记得把AppApplication的Bugly id改成你申请的id，或者你的项目可以照着这个配置来，有什么问题可以提issue
 
 ### 感谢
 [带你不到80行代码搞定Flutter热更新](https://cloud.tencent.com/developer/article/1531498)
