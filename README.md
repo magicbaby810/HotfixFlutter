@@ -1,6 +1,9 @@
 ### 混栈开发之Android端Flutter热更新
 
 
+#### 必备
+- 接入Tinker热更新
+- 项目使用Flutter版本v1.17.3，FlutterBoost版本v1.17.1-hotfixes
 
 #### 背景
 [Flutter暂时放弃热更新的官方解释](https://github.com/flutter/flutter/issues/14330#issuecomment-485565194)
