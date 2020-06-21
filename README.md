@@ -59,7 +59,7 @@ hannibal {
 ```
 记得把AppApplication的Bugly id改成你申请的id，或者你的项目可以照着这个配置来，有什么问题可以提issue
 
-### 感谢
+### 致谢
 [带你不到80行代码搞定Flutter热更新](https://cloud.tencent.com/developer/article/1531498)
 	
 
