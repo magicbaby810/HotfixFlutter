@@ -1,9 +1,2 @@
 include ':app'
 rootProject.name = "HotFixFlutter"
-
-
-setBinding(new Binding([gradle: this]))
-evaluate(new File(settingsDir.parentFile, '/HotFixFlutter/flutterhotfixmodule/.android/include_flutter.groovy'))
-
-include ':flutterhotfixmodule'
-project(':flutterhotfixmodule').projectDir = new File('../HotFixFlutter/flutterhotfixmodule')
