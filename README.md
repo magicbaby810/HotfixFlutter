@@ -38,7 +38,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	```
 	点击Sync Now，执行完成，就会看到项目结构变成田格样式
 	
-	![image](https://github.com/magicbaby810/HotfixFlutter/screenshot/QQ20200624-180051@2x.png)
+	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-180051@2x.png)
 	
 3. 在app的gradle里，配置下面flutter和flutterboost的依赖，再次Sync Now。
  
@@ -63,11 +63,11 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	
 5. 去flutterhotfixmodule项目下修改dart代码，以及添加加载图片资源。修改完后回到HotfixFlutter项目下，把build->bakApk下生成目录上的安装日期抄写到tinker-support.gradle里的baseApkDir里。执行
 
-	![image](https://github.com/magicbaby810/HotfixFlutter/screenshot/QQ20200624-184708@2x.png)
+	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-184708@2x.png)
 	
 6. 进入	bugly官网，打开热更新页面，点击发布新补丁，找到build->outputs->patch->patch_signed_7zip.apk，上传完成，点击全量设备（只限测试，别整个生产的bugly id进来啊），立即下发。稍微等待那么一小会，杀掉应用，再重新打开，会出现
 	
-	![image](https://github.com/magicbaby810/HotfixFlutter/screenshot/QQ20200624-191212@2x.png)
+	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-191212@2x.png)
 	
 	代表补丁已经打上去了，杀掉应用，再次打开进去flutter页面，修复成功！
 
