@@ -26,7 +26,10 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 
 
-#### demo运行步骤
+#### demo运行步骤 
+
+<font color=#ff0000>第一次运行请先按步骤走下</font>
+
 1. down下来后，先打开flutterhotfixmodule项目，open->HotFixFlutter->flutterhotfixmodule，再打开pubspec.yaml，点击Pub get，执行完成。
 
 2. 打开HotFixFlutter，切换到Project下，打开根目录的settings.gradle，把下面的配置copy进去
@@ -46,10 +49,10 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	implementation project(':flutter')
 	implementation project(':flutter_boost')
    ```
-   
+     
   
-  
-4. 把bugly id复制到bugly初始化里面
+4. (如果是老手，已接过Tinker，无需再看下面步骤。新手接入，可以跟着我这个步骤走下，腾讯的官方文档乱七八糟的)   
+把bugly id复制到bugly初始化里面
 
 	```
 	Bugly.init(this, "你的bugly id", true);
