@@ -60,7 +60,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	运行gradle下面的assembleRelease任务
 	
 	
-	![image](https://github.com/magicbaby810/HotfixFlutter/screenshot/QQ20200624-183519@2x.png)
+	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-183519@2x.png)
 	
 	执行完成，安装build->bakApk->带有日期文件夹->app-release.apk。
 	
