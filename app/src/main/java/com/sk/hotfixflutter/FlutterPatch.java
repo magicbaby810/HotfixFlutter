@@ -26,7 +26,7 @@ import io.flutter.embedding.engine.loader.FlutterLoader;
  */
 public class FlutterPatch {
 
-    private static final String TAG = "FlutterPatch";
+    private static final String TAG = "Tinker";
 
 
     private FlutterPatch() {
