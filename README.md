@@ -73,7 +73,9 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-191212@2x.png)
 	
 	代表补丁已经打上去了，杀掉应用，再次打开进去flutter页面，修复成功！
-
+	
+	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/WX20200629-103028.png)
+	
 ### 更新
 未考虑到多人协同开发，下载FlutterBoost都要手动把路径传进去，不太方便。所以改为插桩到
 
