@@ -50,6 +50,8 @@ public class FlutterPatch {
             Field field = FlutterLoader.class.getDeclaredField("aotSharedLibraryName");
             field.setAccessible(true);
             field.set(flutterLoader, libPath);
+
+            TinkerLog.i(TAG, "flutter patch is loaded successfully");
         } catch (Exception e) {
             e.printStackTrace();
         }
