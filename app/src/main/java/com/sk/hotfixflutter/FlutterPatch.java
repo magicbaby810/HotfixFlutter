@@ -26,7 +26,7 @@ import io.flutter.embedding.engine.loader.FlutterLoader;
  */
 public class FlutterPatch {
 
-    private static final String TAG = "FlutterPatch";
+    private static final String TAG = "Tinker";
 
 
     private FlutterPatch() {
@@ -50,6 +50,8 @@ public class FlutterPatch {
             Field field = FlutterLoader.class.getDeclaredField("aotSharedLibraryName");
             field.setAccessible(true);
             field.set(flutterLoader, libPath);
+
+            TinkerLog.i(TAG, "flutter patch is loaded successfully");
         } catch (Exception e) {
             e.printStackTrace();
         }
