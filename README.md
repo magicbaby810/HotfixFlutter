@@ -26,9 +26,10 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 
 
-#### demo运行步骤 
+#### demo运行步骤            Flutter版本1.17.3 Dart版本2.8.4，低于1.12以下的请抓紧升级
 
 <font color=#ff0000>第一次运行请先按步骤走下</font>
+
 
 1. down下来后，先打开flutterhotfixmodule项目，open->HotFixFlutter->flutterhotfixmodule，再打开pubspec.yaml，点击Pub get，执行完成。
 
@@ -39,7 +40,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	evaluate(new File(settingsDir.parentFile, '/HotFixFlutter/flutterhotfixmodule/.android/include_flutter.groovy'))
 	include ':flutterhotfixmodule'
 	```
-	点击Sync Now，执行完成，就会看到项目结构变成田格样式
+	点击Sync Now，执行完成，Mac下会看到项目结构变成田格样式
 	
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-180051@2x.png)
 	
@@ -49,10 +50,25 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	implementation project(':flutter')
 	implementation project(':flutter_boost')
    ```
-     
+   
+#### 注意，未集成或不使用FlutterBoost，请按下面操作
+- 移除implementation project(':flutter_boost')
+- 注掉FlutterPatch类里有关FlutterBoost的代码
+- 注掉AppApplication里initFlutterBoost方法
+- 在AppApplication的onCreate方法里添加
+	
+	```
+	FlutterMain.startInitialization(this);
+	FlutterPatch.flutterPatchInit(this);
+	Bugly.init(this, "你的bugly id", true);
+	```
+	
+ 	
+
+#### Tinker操作
+> 如果是老手，已接过Tinker，无需再看下面步骤。新手接入，可以跟着我这个步骤走下，腾讯的官方文档乱七八糟的    
   
-4. (如果是老手，已接过Tinker，无需再看下面步骤。新手接入，可以跟着我这个步骤走下，腾讯的官方文档乱七八糟的)   
-把bugly id复制到bugly初始化里面
+4.  把bugly id复制到bugly初始化里面
 
 	```
 	Bugly.init(this, "你的bugly id", true);
