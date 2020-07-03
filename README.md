@@ -1,4 +1,4 @@
-### 混栈开发之Android端Flutter热更新
+## 混栈开发之Android端Flutter热更新
 
 
 
@@ -26,7 +26,10 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 
 
-### demo运行步骤            Flutter版本1.17.3 Dart版本2.8.4，低于1.12以下的请抓紧升级
+## Demo运行步骤            
+> Flutter版本1.17.3，Dart版本2.8.4。Flutter低于1.12以下的请抓紧升级。  
+> Gradle版本5.4.1，Gradle Plugin版本3.4.1。项目中Tinker版本不支持高版本的Gradle，请注意。  
+> 纯Flutter项目也可以在android下配置Tinker，但是遇到[tinker id问题](https://github.com/Tencent/tinker/issues/1422)
 
 <font color=#ff0000>第一次运行请先按步骤走下</font>
 
@@ -92,7 +95,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/WX20200629-103028.png)
 	
-### 更新
+## 更新
 未考虑到多人协同开发，下载FlutterBoost都要手动把路径传进去，不太方便。所以改为插桩到
 
 ```
