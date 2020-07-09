@@ -59,7 +59,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 - 注掉AppApplication里initFlutterBoost方法
 - 在AppApplication的onCreate方法里添加
 	
-	```
+	```java
 	FlutterMain.startInitialization(this);
 	FlutterPatch.flutterPatchInit(this);
 	Bugly.init(this, "你的bugly id", true);
