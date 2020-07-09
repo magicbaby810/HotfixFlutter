@@ -1,7 +1,5 @@
 ## 混栈开发之Android端Flutter热更新
 
-
-
 #### 背景
 [Flutter暂时放弃热更新的官方解释](https://github.com/flutter/flutter/issues/14330#issuecomment-485565194)
 
@@ -24,7 +22,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 #### 结论
 整个修复过程，都是利用Flutter自身加载so文件去实现，所以不会出现兼容性和安全性的问题，而且也不会对系统性能有任何大的损耗。同时，Tinker开源，可以方便的查阅Tinker的源码。  
 
-
+<br/>
 
 ## Demo运行步骤            
 > Flutter版本1.17.3，Dart版本2.8.4。Flutter低于1.12以下的请抓紧升级。  
@@ -43,7 +41,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	evaluate(new File(settingsDir.parentFile, '/HotFixFlutter/flutterhotfixmodule/.android/include_flutter.groovy'))
 	include ':flutterhotfixmodule'
 	```
-	点击Sync Now，执行完成，Mac下会看到项目结构变成田格样式
+	点击Sync Now，执行完成，会看到项目结构变成田格样式
 	
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-180051@2x.png)
 	
@@ -53,6 +51,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	implementation project(':flutter')
 	implementation project(':flutter_boost')
    ```
+<br/>
    
 #### 注意，未集成或不使用FlutterBoost，请按下面操作
 - 移除implementation project(':flutter_boost')
@@ -65,8 +64,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	FlutterPatch.flutterPatchInit(this);
 	Bugly.init(this, "你的bugly id", true);
 	```
-	
- 	
+<br/>	
 
 #### Tinker操作
 > 如果是老手，已接过Tinker，无需再看下面步骤。新手接入，可以跟着我这个步骤走下，腾讯的官方文档乱七八糟的    
@@ -94,9 +92,12 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	代表补丁已经打上去了，杀掉应用，再次打开进去flutter页面，修复成功！
 	
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/WX20200629-103028.png)
+<br/>
+<br/>
+<br/>	
 	
 ## 更新
-未考虑到多人协同开发，下载FlutterBoost都要手动把路径传进去，不太方便。所以改为插桩到
+考虑到多人协同开发，下载FlutterBoost需要手动把路径传进去，不太方便。所以改为插桩到
 
 ```
 FlutterMain.startInitialization(mPlatform.getApplication());
@@ -114,7 +115,7 @@ maven { url 'https://dl.bintray.com/magicbaby/maven' }
 dependencies下
 
 ```
-classpath 'com.sk.hannibal:hannibal:1.0.1.2'
+classpath 'com.sk.hannibal:hannibal:1.0.2'
 ```
   
 在app gradle里配置  
@@ -130,8 +131,16 @@ hannibal {
 }
 ```
 记得把AppApplication的Bugly id改成你申请的id，或者你的项目可以照着这个配置来，有什么问题可以提issue
+<br/>
+<br/>
 
-### 致谢
+### Hannibal 1.0.2 
+- 修复Windows下扫描不到FlutterBoost类  
+<br/>
+<br/>
+
+
+### 鸣谢
 [带你不到80行代码搞定Flutter热更新](https://cloud.tencent.com/developer/article/1531498)
 	
 
