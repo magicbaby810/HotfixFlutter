@@ -24,6 +24,12 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 <br/>
 
+## 使用
+
+
+
+
+
 ## Demo运行步骤            
 > Flutter版本1.17.3，Dart版本2.8.4。Flutter低于1.12以下的请抓紧升级。  
 > Gradle版本5.4.1，Gradle Plugin版本3.4.1。项目中Tinker版本不支持高版本的Gradle，请注意。  
@@ -45,57 +51,64 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-180051@2x.png)
 	
-3. 在app的gradle里，配置下面flutter和flutterboost的依赖，再次Sync Now。如果需要运行flutterpatch模块，在gradle对应配置下。
- 
+3. 在app的gradle里，配置下面flutter、flutterboost，以及flutterpatch的依赖，再次Sync Now。
+
 	```
+	implementation project(':flutter')
+	implementation project(':flutter_boost')
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.2'
+   ```
+   如果需要运行flutterpatch模块，在flutterpatch模块下gradle配置如下。
+
+   ```
 	implementation project(':flutter')
 	implementation project(':flutter_boost')
    ```
 <br/>
-   
+
 #### 注意，未集成或不使用FlutterBoost，请按下面操作
 - 移除implementation project(':flutter_boost')
 - 注掉FlutterPatch类里有关FlutterBoost的代码
 - 注掉AppApplication里initFlutterBoost方法
 - 在AppApplication的onCreate方法里添加
-	
+
 	```java
 	FlutterMain.startInitialization(this);
 	FlutterPatch.flutterPatchInit(this);
 	Bugly.init(this, "你的bugly id", true);
 	```
-<br/>	
+<br/>
 
 #### Tinker操作
-> 如果是老手，已接过Tinker，无需再看下面步骤。新手接入，可以跟着我这个步骤走下，腾讯的官方文档乱七八糟的    
-  
+> 如果是老手，已接过Tinker，无需再看下面步骤。新手接入，可以跟着我这个步骤走下，腾讯的官方文档乱七八糟的
+
 4.  把bugly id复制到bugly初始化里面
 
 	```
 	Bugly.init(this, "你的bugly id", true);
-	``` 
-	运行gradle下面的assembleRelease任务
-	
-	
+	```
+	运行gradle下面的assembleRelease任务。如果有error，请先clean project再试。
+
+
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-183519@2x.png)
-	
+
 	执行完成，安装build->bakApk->带有日期文件夹->app-release.apk。
-	
+
 5. 去flutterhotfixmodule项目下修改dart代码，以及添加加载图片资源。修改完后回到HotfixFlutter项目下，把build->bakApk下生成目录上的安装日期抄写到tinker-support.gradle里的baseApkDir里。执行
 
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-184708@2x.png)
-	
+
 6. 进入	bugly官网，打开热更新页面，点击发布新补丁，找到build->outputs->patch->patch_signed_7zip.apk，上传完成，点击全量设备（只限测试，别整个生产的bugly id进来啊），立即下发。稍微等待那么一小会，杀掉应用，再重新打开，会出现
-	
+
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-191212@2x.png)
-	
+
 	代表补丁已经打上去了，杀掉应用，再次打开进去flutter页面，修复成功！
-	
+
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/WX20200629-103028.png)
 <br/>
 <br/>
-<br/>	
-	
+<br/>
+
 ## 更新
 考虑到多人协同开发，下载FlutterBoost需要手动把路径传进去，不太方便。所以改为插桩到
 
@@ -103,7 +116,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 FlutterMain.startInitialization(mPlatform.getApplication());
 ```
 
-此方法后实现，加入hannibal插桩库，根配置添加  
+此方法后实现，加入hannibal插桩库，根配置添加
 
 repositories下
 
@@ -115,37 +128,35 @@ maven { url 'https://dl.bintray.com/magicbaby/maven' }
 dependencies下
 
 ```
-classpath 'com.sk.hannibal:hannibal:1.0.2'
+classpath 'com.sk.hannibal:hannibal:1.0.3'
 ```
-  
-在app gradle里配置  
-  
-```  
+
+在app gradle里配置
+
+```
 apply plugin: 'hannibal'
 	
 hannibal {
 	 adjustFlutterBoost = true
-	 
-	 // 如果不是demo，记得换成自己项目的路径
-	 insertClassFullName = 'com.sk.hotfixflutter.FlutterPatch' 
 }
 ```
 记得把AppApplication的Bugly id改成你申请的id，或者你的项目可以照着这个配置来，有什么问题可以提issue
 <br/>
 <br/>
 
-### Hannibal 1.0.2 
-- 修复Windows下扫描不到FlutterBoost类  
+### FlutterPatch 0.0.2
+- 优化FlutterPatch类，在hannibal中固定路径，防止出错
+
+### Hannibal 1.0.3
+- 移除insertClassFullName，改为依赖flutterpatch来实现，减少出错
+
+### Hannibal 1.0.2
+- 修复Windows下扫描不到FlutterBoost类
 <br/>
 <br/>
 
 
 ### 鸣谢
 [带你不到80行代码搞定Flutter热更新](https://cloud.tencent.com/developer/article/1531498)
-	
-
-
-
-
 
 
