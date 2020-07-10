@@ -28,37 +28,52 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 > Gradle版本5.4.1，Gradle Plugin版本3.4.1。项目中Tinker版本不支持高版本的Gradle，请注意。  
 > 纯Flutter项目也可以在android下配置Tinker，但是遇到[tinker id问题](https://github.com/Tencent/tinker/issues/1422)
  
-## 快速接入
+## 快速接入你的项目
 
-<br/>
 
-根配置添加，repositories下
+1. 根配置添加，repositories下
 
-```
-maven { url 'https://dl.bintray.com/magicbaby/maven' }
-
-```
-
-dependencies下
-
-```
-classpath 'com.sk.hannibal:hannibal:1.0.3'
-```
-
-在app gradle里配置
-
-```
-apply plugin: 'hannibal'
+	```
+	maven { url 'https://dl.bintray.com/magicbaby/maven' }
 	
-hannibal {
-	 adjustFlutterBoost = true
-}
-```
-dependencies下
+	```
 
-```
-implementation 'com.sk.flutterpatch:flutterpatch:0.0.2'
-```
+2. dependencies下
+
+	```
+	classpath 'com.sk.hannibal:hannibal:1.0.3'
+	```
+
+3. 在app gradle里配置
+
+	```
+	apply plugin: 'hannibal'
+		
+	hannibal {
+		 adjustFlutterBoost = true
+	}
+	```
+4. dependencies下
+
+	```
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.3'
+	```
+
+5. 未集成FlutterBoost，在
+
+	```
+	FlutterMain.startInitialization(this);
+	```
+	后加上
+	
+	```
+	FlutterPatch.flutterPatchInit(this);
+	```
+
+6. 集成FlutterBoost，无需配置，自动插桩进FlutterBoost初始化方法里。
+
+
+
 
 记得把AppApplication的Bugly id改成你申请的id，或者你的项目可以照着这个配置来，有什么问题可以提issue
 
@@ -71,12 +86,23 @@ implementation 'com.sk.flutterpatch:flutterpatch:0.0.2'
 
 1. down下来后，先打开flutterhotfixmodule项目，open->HotFixFlutter->flutterhotfixmodule，再打开pubspec.yaml，点击Pub get，执行完成。
 
-2. 打开HotFixFlutter，切换到Project下，打开根目录的settings.gradle，把下面的配置copy进去。注意一定要填对路径，这个是我demo的路径，如果你用自己的项目跑的话，就需要把你的路径给放进来，比如'/xxx/.android/include_flutter.groovy'
+2. 打开HotFixFlutter，切换到Project下，打开根目录的settings.gradle，把下面的配置copy进去。  
+	注意一定要填对路径，这个是我demo的路径，如果你用自己的项目跑的话，就需要把你的路径给放进来，比如'/xxx/.android/include_flutter.groovy'
+
+- Native项目和Flutter项目在同一个目录下，如下配置
 
 	```
 	setBinding(new Binding([gradle: this]))
 	evaluate(new File(settingsDir.parentFile, '/HotFixFlutter/flutterhotfixmodule/.android/include_flutter.groovy'))
 	include ':flutterhotfixmodule'
+	```
+- Native项目和Flutter项目不在同一个目录下，如下配置
+	
+	```
+	setBinding(new Binding([gradle: this]))
+	evaluate(new File(settingsDir.parentFile, flutterhotfixmodule/.android/include_flutter.groovy'))
+	include ':flutterhotfixmodule'
+	project(':flutterhotfixmodule').projectDir = new File('../flutterhotfixmodule')
 	```
 	点击Sync Now，执行完成，会看到项目结构变成田格样式
 	
@@ -87,7 +113,7 @@ implementation 'com.sk.flutterpatch:flutterpatch:0.0.2'
 	```
 	implementation project(':flutter')
 	implementation project(':flutter_boost')
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.2'
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.3'
    ```
    如果需要运行flutterpatch模块，在flutterpatch模块下gradle配置如下。
 
@@ -141,7 +167,7 @@ implementation 'com.sk.flutterpatch:flutterpatch:0.0.2'
 <br/>
 
 ## 更新
-#### FlutterPatch 0.0.2
+#### FlutterPatch 0.0.3
 - 优化FlutterPatch类，在hannibal中固定路径，防止出错
  
 <br/>
