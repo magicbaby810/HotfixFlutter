@@ -50,7 +50,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
    dependencies下
 
 	```
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.3'
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.4'
 	```
 
 
