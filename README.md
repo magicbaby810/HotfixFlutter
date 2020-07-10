@@ -24,16 +24,47 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 <br/>
 
-## 使用
-
-
-
-
-
-## Demo运行步骤            
 > Flutter版本1.17.3，Dart版本2.8.4。Flutter低于1.12以下的请抓紧升级。  
 > Gradle版本5.4.1，Gradle Plugin版本3.4.1。项目中Tinker版本不支持高版本的Gradle，请注意。  
 > 纯Flutter项目也可以在android下配置Tinker，但是遇到[tinker id问题](https://github.com/Tencent/tinker/issues/1422)
+ 
+## 快速接入
+
+<br/>
+
+根配置添加，repositories下
+
+```
+maven { url 'https://dl.bintray.com/magicbaby/maven' }
+
+```
+
+dependencies下
+
+```
+classpath 'com.sk.hannibal:hannibal:1.0.3'
+```
+
+在app gradle里配置
+
+```
+apply plugin: 'hannibal'
+	
+hannibal {
+	 adjustFlutterBoost = true
+}
+```
+dependencies下
+
+```
+implementation 'com.sk.flutterpatch:flutterpatch:0.0.2'
+```
+
+记得把AppApplication的Bugly id改成你申请的id，或者你的项目可以照着这个配置来，有什么问题可以提issue
+
+<br/>
+
+## Demo运行步骤            
 
 <font color=#ff0000>第一次运行请先按步骤走下</font>
 
@@ -110,51 +141,21 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 <br/>
 
 ## 更新
-考虑到多人协同开发，下载FlutterBoost需要手动把路径传进去，不太方便。所以改为插桩到
-
-```
-FlutterMain.startInitialization(mPlatform.getApplication());
-```
-
-此方法后实现，加入hannibal插桩库，根配置添加
-
-repositories下
-
-```
-maven { url 'https://dl.bintray.com/magicbaby/maven' }
-
-```
-
-dependencies下
-
-```
-classpath 'com.sk.hannibal:hannibal:1.0.3'
-```
-
-在app gradle里配置
-
-```
-apply plugin: 'hannibal'
-	
-hannibal {
-	 adjustFlutterBoost = true
-}
-```
-记得把AppApplication的Bugly id改成你申请的id，或者你的项目可以照着这个配置来，有什么问题可以提issue
-<br/>
-<br/>
-
-### FlutterPatch 0.0.2
+#### FlutterPatch 0.0.2
 - 优化FlutterPatch类，在hannibal中固定路径，防止出错
+ 
+<br/>
 
-### Hannibal 1.0.3
+#### Hannibal 1.0.3
 - 移除insertClassFullName，改为依赖flutterpatch来实现，减少出错
 
-### Hannibal 1.0.2
+#### Hannibal 1.0.2
 - 修复Windows下扫描不到FlutterBoost类
-<br/>
-<br/>
 
+
+<br/>
+<br/>
+<br/>
 
 ### 鸣谢
 [带你不到80行代码搞定Flutter热更新](https://cloud.tencent.com/developer/article/1531498)
