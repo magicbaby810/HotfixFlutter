@@ -32,9 +32,6 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    compileOnly project(':flutter')
-    compileOnly project(':flutter_boost')
-
     // 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker）
     compileOnly 'com.tencent.tinker:tinker-android-lib:1.9.14.6'
 

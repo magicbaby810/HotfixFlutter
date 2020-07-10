@@ -97,8 +97,8 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
    如果需要运行flutterpatch模块，在flutterpatch模块下gradle配置如下。
 
    ```
-	implementation project(':flutter')
-	implementation project(':flutter_boost')
+	compileOnly project(':flutter')
+    compileOnly project(':flutter_boost')
    ```
 <br/>
 

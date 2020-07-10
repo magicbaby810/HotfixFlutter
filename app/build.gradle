@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply from: 'tinker-support.gradle'
+apply plugin: 'hannibal'
 
 android {
     compileSdkVersion 29
