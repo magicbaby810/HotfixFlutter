@@ -1,13 +1,10 @@
-package com.sk.hotfixflutter;
+package com.sk.flutterpatch;
 
 import android.content.Context;
 import android.os.Build;
 import android.text.TextUtils;
-import android.view.View;
-import android.view.ViewParent;
 
 import com.idlefish.flutterboost.FlutterBoost;
-import com.idlefish.flutterboost.Platform;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerLoadResult;
 import com.tencent.tinker.lib.util.TinkerLog;
@@ -120,11 +117,16 @@ public class FlutterPatch {
      */
     public static String getCpuABI() {
 
-        for (String cpu : Build.SUPPORTED_ABIS) {
-            if (!TextUtils.isEmpty(cpu)) {
-                TinkerLog.i(TAG, "cpu abi is:" + cpu);
-                return cpu;
+        if (Build.VERSION.SDK_INT >= 21) {
+            for (String cpu : Build.SUPPORTED_ABIS) {
+                if (!TextUtils.isEmpty(cpu)) {
+                    TinkerLog.i(TAG, "cpu abi is:" + cpu);
+                    return cpu;
+                }
             }
+        } else {
+            TinkerLog.i(TAG, "cpu abi is:" + Build.CPU_ABI);
+            return Build.CPU_ABI;
         }
 
         return "";

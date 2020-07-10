@@ -45,7 +45,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-180051@2x.png)
 	
-3. 在app的gradle里，配置下面flutter和flutterboost的依赖，再次Sync Now。
+3. 在app的gradle里，配置下面flutter和flutterboost的依赖，再次Sync Now。如果需要运行flutterpatch模块，在gradle对应配置下。
  
 	```
 	implementation project(':flutter')

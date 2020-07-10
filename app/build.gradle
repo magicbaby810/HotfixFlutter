@@ -42,8 +42,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 }
 
@@ -56,7 +56,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-
     // 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker）
     implementation 'com.tencent.tinker:tinker-android-lib:1.9.14.6'
 
@@ -67,14 +66,6 @@ dependencies {
 
 apply plugin: 'hannibal'
 
-import com.hannibal.gradle.utils.MethodLogAdapter
-import org.objectweb.asm.ClassVisitor
-import org.objectweb.asm.MethodVisitor
-import org.objectweb.asm.Opcodes
-
-import org.objectweb.asm.*
-
 hannibal {
     adjustFlutterBoost = true
-    insertClassFullName = 'com.sk.hotfixflutter.FlutterPatch'
 }
