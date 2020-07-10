@@ -30,6 +30,26 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
  
 ## 快速接入你的项目
 
+#### 未集成FlutterBoost
+
+1. dependencies下
+
+	```
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.3'
+	```
+	
+2. 在Flutter初始化位置
+
+	```
+	FlutterMain.startInitialization(this);
+	```
+	后加上
+		
+	```
+	FlutterPatch.flutterPatchInit(this);
+	```
+	
+#### 集成FlutterBoost
 
 1. 根配置添加，repositories下
 
@@ -59,21 +79,6 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	implementation 'com.sk.flutterpatch:flutterpatch:0.0.3'
 	```
 
-5. 未集成FlutterBoost，在
-
-	```
-	FlutterMain.startInitialization(this);
-	```
-	后加上
-	
-	```
-	FlutterPatch.flutterPatchInit(this);
-	```
-
-6. 集成FlutterBoost，无需配置，自动插桩进FlutterBoost初始化方法里。
-
-
-
 
 记得把AppApplication的Bugly id改成你申请的id，或者你的项目可以照着这个配置来，有什么问题可以提issue
 
@@ -89,24 +94,25 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 2. 打开HotFixFlutter，切换到Project下，打开根目录的settings.gradle，把下面的配置copy进去。  
 	注意一定要填对路径，这个是我demo的路径，如果你用自己的项目跑的话，就需要把你的路径给放进来，比如'/xxx/.android/include_flutter.groovy'
 
-- Native项目和Flutter项目在同一个目录下，如下配置
-
-	```
-	setBinding(new Binding([gradle: this]))
-	evaluate(new File(settingsDir.parentFile, '/HotFixFlutter/flutterhotfixmodule/.android/include_flutter.groovy'))
-	include ':flutterhotfixmodule'
-	```
-- Native项目和Flutter项目不在同一个目录下，如下配置
+	> Native项目和Flutter项目在同一个目录下，如下配置
 	
-	```
-	setBinding(new Binding([gradle: this]))
-	evaluate(new File(settingsDir.parentFile, flutterhotfixmodule/.android/include_flutter.groovy'))
-	include ':flutterhotfixmodule'
-	project(':flutterhotfixmodule').projectDir = new File('../flutterhotfixmodule')
-	```
+		```
+		setBinding(new Binding([gradle: this]))
+		evaluate(new File(settingsDir.parentFile, '/HotFixFlutter/flutterhotfixmodule/.android/include_flutter.groovy'))
+		include ':flutterhotfixmodule'
+		```
+	> Native项目和Flutter项目不在同一个目录下，如下配置
+		
+		```
+		setBinding(new Binding([gradle: this]))
+		evaluate(new File(settingsDir.parentFile, flutterhotfixmodule/.android/include_flutter.groovy'))
+		include ':flutterhotfixmodule'
+		project(':flutterhotfixmodule').projectDir = new File('../flutterhotfixmodule')
+		```
 	点击Sync Now，执行完成，会看到项目结构变成田格样式
 	
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-180051@2x.png)
+	
 	
 3. 在app的gradle里，配置下面flutter、flutterboost，以及flutterpatch的依赖，再次Sync Now。
 
@@ -123,18 +129,6 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
    ```
 <br/>
 
-#### 注意，未集成或不使用FlutterBoost，请按下面操作
-- 移除implementation project(':flutter_boost')
-- 注掉FlutterPatch类里有关FlutterBoost的代码
-- 注掉AppApplication里initFlutterBoost方法
-- 在AppApplication的onCreate方法里添加
-
-	```java
-	FlutterMain.startInitialization(this);
-	FlutterPatch.flutterPatchInit(this);
-	Bugly.init(this, "你的bugly id", true);
-	```
-<br/>
 
 #### Tinker操作
 > 如果是老手，已接过Tinker，无需再看下面步骤。新手接入，可以跟着我这个步骤走下，腾讯的官方文档乱七八糟的
