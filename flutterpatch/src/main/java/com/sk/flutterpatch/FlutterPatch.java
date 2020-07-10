@@ -18,8 +18,8 @@ import io.flutter.embedding.engine.loader.FlutterLoader;
 
 
 /**
- * 在指定位置插桩hook方法
- * 此类可随意挪动和修改，只需将全类名放到gradle配置里的insertClassFullName
+ * 利用反射把tinker生成的flutter补丁，打进flutter的so加载流程中
+ *
  */
 public class FlutterPatch {
 
@@ -57,20 +57,22 @@ public class FlutterPatch {
     /**
      *
      * 插桩方法
-     * 此方法不要修改，否则不会成功
+     * 此方法不可修改，否则不会成功
      *
      * @param obj
      */
     public static void hook(Object obj) {
-        if (obj instanceof FlutterBoost) {
-            FlutterBoost flutterBoost = (FlutterBoost) obj;
-            TinkerLog.i(TAG, "find FlutterBoost");
+        if (obj instanceof Context) {
 
-            flutterPatchInit(flutterBoost.platform().getApplication());
+            Context context = (Context) obj;
+            TinkerLog.i(TAG, "find FlutterMain");
 
+            flutterPatchInit(context);
         } else {
+
             TinkerLog.i(TAG, "Object: " + obj.getClass().getName());
         }
+
     }
 
     public static String findLibraryFromTinker(Context context, String relativePath, String libName) throws UnsatisfiedLinkError {

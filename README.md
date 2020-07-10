@@ -17,7 +17,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 ```FlutterMain.startInitialization(mPlatform.getApplication());```
 
-或者把补丁so包路径传进来，add到flutterShellArgs里。前一种方法需要反射，性能会有损耗，后一种虽然没什么损耗，只是需要把路径层层传进来，改动有点大。不过FlutterBoost做为模块依赖进来，改动一下也是可以的，测试生效。
+这就需要利用插桩，找到初始化方法，把反射方法插到初始化方法后面。测试生效。
 
 #### 结论
 整个修复过程，都是利用Flutter自身加载so文件去实现，所以不会出现兼容性和安全性的问题，而且也不会对系统性能有任何大的损耗。同时，Tinker开源，可以方便的查阅Tinker的源码。  
@@ -30,27 +30,6 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
  
 ## 快速接入你的项目
 
-#### 未集成FlutterBoost
-
-1. dependencies下
-
-	```
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.3'
-	```
-	
-2. 在Flutter初始化位置
-
-	```
-	FlutterMain.startInitialization(this);
-	```
-	后加上
-		
-	```
-	FlutterPatch.flutterPatchInit(this);
-	```
-	
-#### 集成FlutterBoost
-
 1. 根配置添加，repositories下
 
 	```
@@ -58,22 +37,19 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	
 	```
 
-2. dependencies下
+   dependencies下
 
 	```
-	classpath 'com.sk.hannibal:hannibal:1.0.3'
+	classpath 'com.sk.hannibal:hannibal:1.0.5.1'
 	```
 
-3. 在app gradle里配置
+2. 在app gradle里配置
 
 	```
 	apply plugin: 'hannibal'
 		
-	hannibal {
-		 adjustFlutterBoost = true
-	}
 	```
-4. dependencies下
+   dependencies下
 
 	```
 	implementation 'com.sk.flutterpatch:flutterpatch:0.0.3'
@@ -119,7 +95,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	```
 	implementation project(':flutter')
 	implementation project(':flutter_boost')
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.3'
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.4'
    ```
    如果需要运行flutterpatch模块，在flutterpatch模块下gradle配置如下。
 
@@ -161,10 +137,13 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 <br/>
 
 ## 更新
-#### FlutterPatch 0.0.3
+#### FlutterPatch 0.0.4
 - 优化FlutterPatch类，在hannibal中固定路径，防止出错
  
 <br/>
+#### Hannibal 1.0.5.1
+- 不需再配置hannibal扩展项
+- 不再区分是否集成FlutterBoost
 
 #### Hannibal 1.0.3
 - 移除insertClassFullName，改为依赖flutterpatch来实现，减少出错

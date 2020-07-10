@@ -10,9 +10,6 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -34,14 +31,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    compileOnly project(':flutter')
+    compileOnly project(':flutter_boost')
 
     // 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker）
-    implementation 'com.tencent.tinker:tinker-android-lib:1.9.14.6'
+    compileOnly 'com.tencent.tinker:tinker-android-lib:1.9.14.6'
 
 }
 
@@ -51,7 +46,7 @@ publish {
     repoName = "maven"   //bintray上常见的仓库的名字
     groupId = 'com.sk.flutterpatch'//groupId  一般为包名
     artifactId = 'flutterpatch'//artifactId 一般为项目名称
-    publishVersion = '0.0.2'//版本号
+    publishVersion = '0.0.4'//版本号
     desc = ''//描述，不重要
     website = 'https://github.com/magicbaby810/HotfixFlutter'//网站,一般是GitHub的项目地址，一定要是可以访问到的地址
 }

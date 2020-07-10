@@ -62,10 +62,3 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
 }
-
-
-apply plugin: 'hannibal'
-
-hannibal {
-    adjustFlutterBoost = true
-}
