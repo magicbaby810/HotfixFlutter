@@ -138,6 +138,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 - 优化FlutterPatch类，在hannibal中固定路径，防止出错
  
 <br/>
+
 #### Hannibal 1.0.5.1
 - 不需再配置hannibal扩展项
 - 不再区分是否集成FlutterBoost
