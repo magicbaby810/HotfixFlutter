@@ -34,7 +34,6 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 	```
 	maven { url 'https://dl.bintray.com/magicbaby/maven' }
-	
 	```
 
    dependencies下
@@ -46,8 +45,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 2. 在app gradle里配置
 
 	```
-	apply plugin: 'hannibal'
-		
+	apply plugin: 'hannibal'	
 	```
    dependencies下
 
@@ -55,8 +53,6 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	implementation 'com.sk.flutterpatch:flutterpatch:0.0.3'
 	```
 
-
-记得把AppApplication的Bugly id改成你申请的id，或者你的项目可以照着这个配置来，有什么问题可以提issue
 
 <br/>
 
@@ -72,19 +68,20 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 	> Native项目和Flutter项目在同一个目录下，如下配置
 	
-		```
-		setBinding(new Binding([gradle: this]))
-		evaluate(new File(settingsDir.parentFile, '/HotFixFlutter/flutterhotfixmodule/.android/include_flutter.groovy'))
-		include ':flutterhotfixmodule'
-		```
+	
+	```
+	setBinding(new Binding([gradle: this]))
+	evaluate(new File(settingsDir.parentFile, '/HotFixFlutter/flutterhotfixmodule/.android/include_flutter.groovy'))
+	include ':flutterhotfixmodule'
+	```
 	> Native项目和Flutter项目不在同一个目录下，如下配置
 		
-		```
-		setBinding(new Binding([gradle: this]))
-		evaluate(new File(settingsDir.parentFile, flutterhotfixmodule/.android/include_flutter.groovy'))
-		include ':flutterhotfixmodule'
-		project(':flutterhotfixmodule').projectDir = new File('../flutterhotfixmodule')
-		```
+	```
+	setBinding(new Binding([gradle: this]))
+	evaluate(new File(settingsDir.parentFile, flutterhotfixmodule/.android/include_flutter.groovy'))
+	include ':flutterhotfixmodule'
+	project(':flutterhotfixmodule').projectDir = new File('../flutterhotfixmodule')
+	```
 	点击Sync Now，执行完成，会看到项目结构变成田格样式
 	
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-180051@2x.png)
