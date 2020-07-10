@@ -67,13 +67,6 @@ dependencies {
 
 apply plugin: 'hannibal'
 
-import com.hannibal.gradle.utils.MethodLogAdapter
-import org.objectweb.asm.ClassVisitor
-import org.objectweb.asm.MethodVisitor
-import org.objectweb.asm.Opcodes
-
-import org.objectweb.asm.*
-
 hannibal {
     adjustFlutterBoost = true
     insertClassFullName = 'com.sk.hotfixflutter.FlutterPatch'
