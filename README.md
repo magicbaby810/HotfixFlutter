@@ -28,7 +28,12 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 > Gradle版本5.4.1，Gradle Plugin版本3.4.1。项目中Tinker版本不支持高版本的Gradle，请注意。  
 > 纯Flutter项目也可以在android下配置Tinker，但是遇到[tinker id问题](https://github.com/Tencent/tinker/issues/1422)
  
-## 快速接入你的项目
+## 快速接入
+> 无需关心是否集成FlutterBoost 
+
+> 无需关心FlutterPatch类
+
+> 无需在Flutter初始化后编写 `FlutterPatch.flutterPatchInit(this);`
 
 1. 根配置添加，repositories下
 
