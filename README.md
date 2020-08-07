@@ -68,7 +68,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 <font color=#ff0000>第一次运行请先按步骤走下</font>
 
 
-1. down下来后，先打开flutterhotfixmodule项目，open->HotFixFlutter->flutterhotfixmodule，再打开pubspec.yaml，点击Pub get，执行完成。
+1. down下来后，先打开flutterhotfixmodule项目，open->HotFixFlutter->flutterhotfixmodule，别管报错信息，直接打开pubspec.yaml，点击Pub get，执行完成。
 
 2. 打开HotFixFlutter，切换到Project下，打开根目录的settings.gradle，把下面的配置copy进去。  
 	注意一定要填对路径，这个是我demo的路径，如果你用自己的项目跑的话，就需要把你的路径给放进来，比如'/xxx/.android/include_flutter.groovy'
