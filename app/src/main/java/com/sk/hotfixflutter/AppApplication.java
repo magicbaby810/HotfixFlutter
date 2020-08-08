@@ -70,6 +70,7 @@ import io.flutter.plugin.common.MethodChannel;
 public class AppApplication extends MultiDexApplication {
 
 
+    // 测试sophix时，请注掉attachBaseContext
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
