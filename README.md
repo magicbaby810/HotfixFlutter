@@ -1,5 +1,6 @@
 ## 混栈开发之Android端Flutter热更新 
 
+### Sophix 也可支持Flutter热更新了！！！ 
 Flutter里的Dart代码和资源文件都可修复
 
 #### 背景
@@ -31,11 +32,13 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 > 纯Flutter项目也可以在android下配置Tinker，但是遇到[tinker id问题](https://github.com/Tencent/tinker/issues/1422)
  
 ## 快速接入
-> 无需关心是否集成FlutterBoost 
+> 无需关心是否集成FlutterBoost   
 
 > 无需关心FlutterPatch类
 
-> 无需在Flutter初始化后编写 `FlutterPatch.flutterPatchInit(this);`
+> 无需在Flutter初始化后编写 `FlutterPatch.flutterPatchInit(this);`  
+
+> 新增Sophix支持Flutter热更新 
 
 1. 根配置添加，repositories下
 
@@ -46,7 +49,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
    dependencies下
 
 	```
-	classpath 'com.sk.hannibal:hannibal:1.0.5.1'
+	classpath 'com.sk.hannibal:hannibal:1.0.6'
 	```
 
 2. 在app gradle里配置
@@ -57,7 +60,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
    dependencies下
 
 	```
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.4'
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.5.1'
 	```
 
 
@@ -99,7 +102,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	```
 	implementation project(':flutter')
 	implementation project(':flutter_boost')
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.4'
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.5.1'
    ```
    在flutterpatch模块的gradle里配置如下
 
@@ -138,13 +141,30 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/WX20200629-103028.png)
 <br/>
 <br/>
+
+#### Sophix操作  
+
+这个不需要细说了吧，阿里的接入文档，还是很清晰的，配置完就ok了。  
+
+- 比Tinker多个`SophixStubApplication`  
+- 打补丁需要用到`SophixPatchTool`，一定要区分好新旧包
+- 还可以利用`Sophix调试工具V3` app快速加载补丁
+- 在demo里操作Sophix的时候，记得在`AppApplication`里注掉`attachBaseContext`这个方法
+
+<br/>
 <br/>
 
 ## 更新
+#### FlutterPatch 0.0.5.1
+- 新增Sophix hook方法，区分Tinker和Sophix
+
 #### FlutterPatch 0.0.4
 - 优化FlutterPatch类，在hannibal中固定路径，防止出错
  
 <br/>
+
+#### Hannibal 1.0.6
+- 新增Sophix hook扩展项
 
 #### Hannibal 1.0.5.1
 - 不需再配置hannibal扩展项
