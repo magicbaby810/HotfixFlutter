@@ -120,13 +120,13 @@ public void a(String var1) {
     }
 ```
 可以看到这里创建了不同的补丁路径，至于我们要找的Flutter补丁so包具体在libs还是libs_呢？懒得猜了，直看ˆ往这个方法里插桩干它  
-狠狠的插入我的代码，把这个方法的形参var1打印出来，可以看到一个完整的手机存储路径
+狠狠的插入代码，把这个方法的形参var1打印出来，可以看到一个完整的手机存储路径
 `/data/user/0/com.sk.hotfixflutter/files/sophix`  
 然后在hook方法里遍历这个文件夹，最终，我们要找的补丁so包完整路径就是
 `/data/user/0/com.sk.hotfixflutter/files/sophix/libs/libapp.so`
 
 不对，阿里的代码太明显了，日志完全没隐藏啊  
-我在Log控制台，输入`NativeLibManager`
+在Log控制台，输入`NativeLibManager`
 
 ```
 22687-22961/? D/Sophix.NativeLibManager:  init primaryCpuAbis: [arm64-v8a]
@@ -134,10 +134,10 @@ public void a(String var1) {
 22687-22961/? V/Sophix.NativeLibManager:  getLibPatchMap libPatchMap: {app=arm64-v8a}
 22687-22961/? V/Sophix.NativeLibManager:  unZipLibFile entryName: lib/arm64-v8a/libapp.so soName: libapp.so
 ```
-卧槽，浪费我插桩时间
+卧槽，浪费插桩时间
 
 ## 实现
-现在相当于我有了Sophix生成的补丁so包，那剩下来的流程跟Tinker要做的基本一样了。
+现在相当于有了Sophix生成的补丁so包，那剩下来的流程跟Tinker要做的基本一样了。
 但是怕Sophix路径以后有变，所以还是要在上面的a方法里插桩拿Sophix定义的路径，再补上libs/libapp.so，就可以了。  
 
 在插桩库里，需要提前知道当前项目使用了哪个框架做热修复。因为如果其中一个没有初始化，调用的方法就会崩溃。所以要在它们初始化的方法里插桩，区分当前项目使用了哪个框架做热修复，就拿那个框架的so包路径去执行反射方法。分别测试两个框架，生效。
