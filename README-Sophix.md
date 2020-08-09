@@ -1,6 +1,6 @@
 ## 混栈开发之Android端Flutter热更新-Sophix篇（二）
 
-(混栈开发之Android端Flutter热更新-Tinker篇（一）)[https://juejin.im/post/6844904195665952776]
+[混栈开发之Android端Flutter热更新-Tinker篇（一）](https://juejin.im/post/6844904195665952776)
 
 ## 分析
 之前写了利用Tinker来进行Flutter的热更新，分析了下原理以及实现步骤。  
