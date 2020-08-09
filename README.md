@@ -154,32 +154,6 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 <br/>
 <br/>
 
-## 更新
-#### FlutterPatch 0.0.5.1
-- 新增Sophix hook方法，区分Tinker和Sophix
-
-#### FlutterPatch 0.0.4
-- 优化FlutterPatch类，在hannibal中固定路径，防止出错
- 
-<br/>
-
-#### Hannibal 1.0.6
-- 新增Sophix hook扩展项
-
-#### Hannibal 1.0.5.1
-- 不需再配置hannibal扩展项
-- 不再区分是否集成FlutterBoost
-
-#### Hannibal 1.0.3
-- 移除insertClassFullName，改为依赖flutterpatch来实现，减少出错
-
-#### Hannibal 1.0.2
-- 修复Windows下扫描不到FlutterBoost类
-
-
-<br/>
-<br/>
-<br/>
 
 ### 鸣谢
 [带你不到80行代码搞定Flutter热更新](https://cloud.tencent.com/developer/article/1531498)
