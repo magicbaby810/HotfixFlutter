@@ -49,7 +49,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
    dependencies下
 
 	```
-	classpath 'com.sk.hannibal:hannibal:1.0.6'
+	classpath 'com.sk.hannibal:hannibal:1.0.7'
 	```
 
 2. 在app gradle里配置
@@ -150,6 +150,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 - 打补丁需要用到`SophixPatchTool`，一定要区分好新旧包
 - 还可以利用`Sophix调试工具V3` app快速加载补丁
 - 在demo里操作Sophix的时候，记得在`AppApplication`里注掉`attachBaseContext`这个方法
+
 
 <br/>
 <br/>
