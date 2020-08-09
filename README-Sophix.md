@@ -6,7 +6,7 @@
 之前写了利用Tinker来进行Flutter的热更新，分析了下原理以及实现步骤。  
 后来一想，做为同样热更新框架的Sophix难道不可以吗？
 按照sophix热修复的接入文档一步步接入完成，实验了一把，原生的改动修复，Flutter的改动并未修复。  
-解开sophix-patch.jar包，里面有Flutter的补丁so包。Sophix和Tinker一样，也把Flutter的差分包给打出来了。  
+解开sophix-patch.jar包，里面有Flutter的补丁so包。Sophix和Tinker一样，也把Flutter的补丁包给打出来了。  
 那就简单了，我们只要找到这个补丁so包位置，检测下是否有so包，有的话也按照反射来处理，这样就可以使Sophix也连带把Flutter给修复了。  
 操作流程跟Tinker一样，但是有一个问题，如何准确找到补丁so的位置？
 
