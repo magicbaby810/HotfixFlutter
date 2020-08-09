@@ -3,8 +3,7 @@
 ### Sophix 也可支持Flutter热更新了！！！ 
 Flutter里的Dart代码和资源文件都可修复
 
-[混栈开发之Android端Flutter热更新-Sophix篇（二）]（https://github.com/magicbaby810/HotfixFlutter/blob/master/README-Sophix.md）
-
+[混栈开发之Android端Flutter热更新-Sophix篇（二）](https://github.com/magicbaby810/HotfixFlutter/blob/master/README-Sophix.md)
 
 #### 背景
 [Flutter暂时放弃热更新的官方解释](https://github.com/flutter/flutter/issues/14330#issuecomment-485565194)
