@@ -30,11 +30,10 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 <br/>
 
-> Flutter版本1.22.5，Dart版本2.10.4。Flutter低版本抓紧升级，不要用命令去更新，最好直接去官网下载zip解压，能省去好多问题。  
+
+> Flutter版本1.22.5，Dart版本2.10.4。Flutter低版本抓紧升级，不要用命令去升级Flutter，最好直接去官网下载zip解压，能省去好多问题。  
 > Gradle版本5.4.1，Gradle Plugin版本3.4.1。
 
-# 纯Flutter项目也可以在android下配置Tinker，但是遇到[tinker id问题](https://github.com/Tencent/tinker/issues/1422)
-# 所以纯Flutter项目不能适用这个方案，如果需求允许，可以改成混合的
  
 ## 快速接入
 > 无需关心是否集成FlutterBoost   
