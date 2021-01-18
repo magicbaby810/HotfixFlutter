@@ -15,9 +15,10 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 接入Flutter模块，修改Dart代码后，执行buildTinkerPatchRelease，生成patch\_signed\_7zip.apk补丁包，解开patch\_signed\_7zip.apk，里面也生成了Flutter模块的补丁so包。测试直接使用Tinker进行热更新，Dart代码的修改并未生效。
 
-由于Flutter有自己的一套so加载流程，Tinker无法加载到Flutter的补丁so包。分析下Flutter的so加载流程，在FlutterLoader类里可以通过反射字段aotSharedLibraryName把它set进去，这样就可以实现加载补丁so文件，测试Dart代码的修改生效。
+由于Flutter有自己的一套so加载流程，Tinker无法加载到Flutter的补丁so包。分析下Flutter的so加载流程，在FlutterLoader类里可以通过反射字段aotSharedLibraryName把它set进去，这样就可以实现加载补丁so文件，测试Dart代码的修改生效。Flutter新版本增加了FlutterApplicationInfo，但是不影响反射的使用，反射FlutterApplicationInfo里的aotSharedLibraryName，把路径set进去，再塞给FlutterLoader（感谢@heroghost的提醒）。
 
-#### FlutterBoost
+
+#### FlutterBoost (flutter1.22.5版本有问题，暂时不集成)
 但是在集成FlutterBoost后，这样就行不通了。因为Flutter的初始化封装在FlutterBoost类里，FlutterBoost里又new了一个FlutterEngine引擎类，传入一个空字符数组的FlutterShellArgs。需要我们把反射方法放在里面的初始化方法后执行
 
 ```FlutterMain.startInitialization(mPlatform.getApplication());```
@@ -29,8 +30,8 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 <br/>
 
-> Flutter版本1.17.3，Dart版本2.8.4。Flutter低于1.12以下的请抓紧升级。  
-> Gradle版本5.4.1，Gradle Plugin版本3.4.1。项目中Tinker版本不支持高版本的Gradle，请注意。  
+> Flutter版本1.22.5，Dart版本2.10.4。Flutter低版本抓紧升级，不要用命令去更新，最好直接去官网下载zip解压，能省去好多问题。  
+> Gradle版本5.4.1，Gradle Plugin版本3.4.1。
 
 # 纯Flutter项目也可以在android下配置Tinker，但是遇到[tinker id问题](https://github.com/Tencent/tinker/issues/1422)
 # 所以纯Flutter项目不能适用这个方案，如果需求允许，可以改成混合的
@@ -64,7 +65,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
    dependencies下
 
 	```
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.5.1'
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.6'
 	```
 
 
@@ -106,7 +107,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	```
 	implementation project(':flutter')
 	implementation project(':flutter_boost')
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.5.1'
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.6'
    ```
    如果要测试flutterpatch，在flutterpatch模块的gradle里配置如下
 
