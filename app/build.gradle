@@ -60,10 +60,6 @@ dependencies {
     implementation 'com.aliyun.ams:alicloud-android-hotfix:3.2.14'
 
 
-    implementation project(':flutter')
-//    implementation project(':flutter_boost')
-    implementation 'com.sk.flutterpatch:flutterpatch:0.0.6'
-
 
     // 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker）
     implementation 'com.tencent.tinker:tinker-android-lib:1.9.14.6'
