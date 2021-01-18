@@ -5,7 +5,6 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.idlefish.flutterboost.FlutterBoost;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerLoadResult;
 import com.tencent.tinker.lib.util.TinkerLog;
@@ -15,6 +14,8 @@ import com.tencent.tinker.loader.shareutil.SharePatchFileUtil;
 import java.io.File;
 import java.lang.reflect.Field;
 
+import io.flutter.FlutterInjector;
+import io.flutter.embedding.engine.loader.FlutterApplicationInfo;
 import io.flutter.embedding.engine.loader.FlutterLoader;
 
 
@@ -45,14 +46,23 @@ public class FlutterPatch {
 
     public static void reflect(String libPath) {
         try {
-            FlutterLoader flutterLoader = FlutterLoader.getInstance();
+            FlutterLoader flutterLoader = FlutterInjector.instance().flutterLoader();
 
-            Field field = FlutterLoader.class.getDeclaredField("aotSharedLibraryName");
+            Field field = FlutterLoader.class.getDeclaredField("flutterApplicationInfo");
             field.setAccessible(true);
-            field.set(flutterLoader, libPath);
+
+            FlutterApplicationInfo flutterApplicationInfo = (FlutterApplicationInfo) field.get(flutterLoader);
+
+            Field aotSharedLibraryNameField = FlutterApplicationInfo.class.getDeclaredField("aotSharedLibraryName");
+            aotSharedLibraryNameField.setAccessible(true);
+            aotSharedLibraryNameField.set(flutterApplicationInfo, libPath);
+
+            field.set(flutterLoader, flutterApplicationInfo);
 
             TinkerLog.i(TAG, "flutter patch is loaded successfully");
+
         } catch (Exception e) {
+            TinkerLog.i(TAG, "flutter reflect is failed");
             e.printStackTrace();
         }
     }
