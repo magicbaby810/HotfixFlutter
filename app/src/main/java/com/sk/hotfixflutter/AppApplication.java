@@ -83,7 +83,7 @@ public class AppApplication extends MultiDexApplication {
         super.onCreate();
 //        initFlutterBoost();
         FlutterMain.startInitialization(this);
-        Bugly.init(this, "81817dea9c", true);
+        Bugly.init(this, "你的bugly id", true);
     }
 
     //配置flutterboost

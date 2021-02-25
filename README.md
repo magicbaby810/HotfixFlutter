@@ -64,7 +64,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
    dependencies下
 
 	```
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.6'
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.7'
 	```
 
 
@@ -105,14 +105,12 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 	```
 	implementation project(':flutter')
-	implementation project(':flutter_boost')
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.6'
+	implementation 'com.sk.flutterpatch:flutterpatch:0.0.7'
    ```
    如果要测试flutterpatch，在flutterpatch模块的gradle里配置如下
 
    ```
 	compileOnly project(':flutter')
-    compileOnly project(':flutter_boost')
    ```
 <br/>
 
