@@ -47,13 +47,13 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 1. 根配置添加，repositories下
 
 	```
-	maven { url 'https://dl.bintray.com/magicbaby/maven' }
+	maven { url 'https://jitpack.io' }
 	```
 
    dependencies下
 
 	```
-	classpath 'com.sk.hannibal:hannibal:1.0.7'
+	classpath 'com.github.magicbaby810:hannibal:1.0.7.3'
 	```
 
 2. 在app gradle里配置
