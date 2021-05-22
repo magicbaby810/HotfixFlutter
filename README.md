@@ -44,7 +44,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 > 新增Sophix支持Flutter热更新 
 
-1. 根配置添加，repositories下
+1. 根配置添加，repositories下 （把jcenter的配置清除掉）
 
 	```
 	maven { url 'https://jitpack.io' }
