@@ -36,9 +36,27 @@ public class FlutterPatch {
     }
 
     public static String getLibPath(Context context) {
-        String libPath = findLibraryFromTinker(context, "lib" + File.separator + getCpuABI(), "libapp.so");
-        if (!TextUtils.isEmpty(libPath) && libPath.equals("libapp.so")) {
-            return null;
+
+        String libPath = "";
+
+        if (Build.VERSION.SDK_INT >= 21) {
+
+            for (String cpuABI : Build.SUPPORTED_ABIS) {
+                if (!TextUtils.isEmpty(cpuABI)) {
+
+                    libPath = findLibraryFromTinker(context, "lib" + File.separator + cpuABI, "libapp.so");
+                    if (!TextUtils.isEmpty(libPath) && !libPath.equals("libapp.so")) {
+                        TinkerLog.i(TAG, "cpu abi is:" + cpuABI);
+                        break;
+                    }
+                }
+            }
+        } else {
+
+            libPath = findLibraryFromTinker(context, "lib" + File.separator + Build.CPU_ABI, "libapp.so");
+            if (!TextUtils.isEmpty(libPath) && !libPath.equals("libapp.so")) {
+                TinkerLog.i(TAG, "cpu abi is:" + Build.CPU_ABI);
+            }
         }
         return libPath;
     }
@@ -181,25 +199,4 @@ public class FlutterPatch {
         return libName;
     }
 
-    /**
-     * 获取最优abi
-     *
-     * @return
-     */
-    public static String getCpuABI() {
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            for (String cpu : Build.SUPPORTED_ABIS) {
-                if (!TextUtils.isEmpty(cpu)) {
-                    TinkerLog.i(TAG, "cpu abi is:" + cpu);
-                    return cpu;
-                }
-            }
-        } else {
-            TinkerLog.i(TAG, "cpu abi is:" + Build.CPU_ABI);
-            return Build.CPU_ABI;
-        }
-
-        return "";
-    }
 }
