@@ -1,7 +1,7 @@
 ## 混栈开发之Android端Flutter热更新-Tinker篇（一）
 
 ### Sophix 也可支持Flutter热更新了！！！ 
-Flutter里的Dart代码和资源文件都可修复
+Flutter里的Dart代码和资源文件都可修复，请老铁们在接入前，先按照tinker或sophix的文档配置好，并调试确认可以正常修复原生代码，再接入hotfixflutter的配置。如果直接接入，出了问题，你会迷茫到底是tinker或sophix的问题还是hotfixflutter的问题。
 
 [混栈开发之Android端Flutter热更新-Sophix篇（二）](https://github.com/magicbaby810/HotfixFlutter/blob/master/README-Sophix.md)
 
@@ -44,16 +44,16 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
 > 新增Sophix支持Flutter热更新 
 
-1. 根配置添加，repositories下
+1. 根配置添加，repositories下 （把jcenter的配置清除掉）
 
 	```
-	maven { url 'https://dl.bintray.com/magicbaby/maven' }
+	maven { url 'https://jitpack.io' }
 	```
 
    dependencies下
 
 	```
-	classpath 'com.sk.hannibal:hannibal:1.0.7'
+	classpath 'com.github.magicbaby810:hannibal:1.0.7.3'
 	```
 
 2. 在app gradle里配置
