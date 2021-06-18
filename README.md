@@ -73,7 +73,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	```
 	
    另外说明，纯flutter项目，自动生成的tinkerId会出现补丁和基准包的id不一致，所以请各位自行设置tinkerId，
-   注掉autoGenerateTinkerId
+   注掉autoGenerateTinkerId  [纯Flutter项目热更新demo](https://github.com/magicbaby810/FlutterHotFix)
 
 	```
 	tinkerId = "1.0.0-base"
