@@ -55,6 +55,11 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	```
 	classpath 'com.github.magicbaby810:hannibal:1.0.7.3'
 	```
+	
+	如果纯flutter项目换成这个
+	```
+	classpath 'com.github.magicbaby810:hannibalx:0.1'
+	```
 
 2. 在app gradle里配置
 
@@ -66,7 +71,14 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	```
 	implementation 'com.sk.flutterpatch:flutterpatch:0.0.7'
 	```
+	
+   另外说明，纯flutter项目，自动生成的tinkerId会出现补丁和基准包的id不一致，所以请各位自行设置tinkerId，
+   注掉autoGenerateTinkerId
 
+	```
+	tinkerId = "1.0.0-base"
+	//    autoGenerateTinkerId = true
+	```
 
 <br/>
 
