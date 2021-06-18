@@ -56,7 +56,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	classpath 'com.github.magicbaby810:hannibal:1.0.7.3'
 	```
 	
-	如果纯flutter项目换成这个
+	如果纯flutter项目换成这个，其他不变
 	```
 	classpath 'com.github.magicbaby810:hannibalx:0.1'
 	```
