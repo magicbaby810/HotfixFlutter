@@ -36,8 +36,16 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 
  
 ## 快速接入
+> 最新升级hannibal 1.0.9和hannibalx 0.2配合flutterpatch.aar，解决项目中配置ndk后，和flutterpatch找的最优架构对不上。现在的逻辑如下
+>> 1、不配置ndk，取最优架构
 
-> 新增Sophix支持Flutter热更新 
+>> 2、配置一个架构，自动读取当前架构
+ 
+>> 3、配置多个架构，包含最优架构，取最优架构
+
+>> 4、配置多个架构，不包含最优架构，取随机架构
+
+> Sophix支持Flutter热更新 
 
 1. 根配置添加，repositories下 （把jcenter的配置清除掉）
 
@@ -53,7 +61,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	
 	如果纯flutter项目换成这个，其他不变
 	```
-	classpath 'com.github.magicbaby810:hannibalx:0.2'
+	classpath 'com.github.magicbaby810:hannibalx:0.1'
 	```
 
 2. 在app gradle里配置
@@ -61,7 +69,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	```
 	apply plugin: 'hannibal'	
 	```
-   dependencies下  [flutterpatch.aar下载地址](https://github.com/magicbaby810/HotfixFlutter/raw/master/app/libs/flutterpatch.aar)
+   dependencies下
 
 	```
 	implementation files('libs/flutterpatch.aar')
