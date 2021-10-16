@@ -1,3 +1,2 @@
-include ':flutterpatch'
 include ':app'
 rootProject.name = "HotFixFlutter"
