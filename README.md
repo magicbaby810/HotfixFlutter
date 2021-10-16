@@ -61,7 +61,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	```
 	apply plugin: 'hannibal'	
 	```
-   dependencies下
+   dependencies下  [flutterpatch.aar下载地址](https://github.com/magicbaby810/HotfixFlutter/raw/master/app/libs/flutterpatch.aar)
 
 	```
 	implementation files('libs/flutterpatch.aar')
