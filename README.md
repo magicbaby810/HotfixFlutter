@@ -31,16 +31,11 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 <br/>
 
 
-> Flutter版本1.22.5，Dart版本2.10.4。Flutter低版本抓紧升级，不要用命令去升级Flutter，最好直接去官网下载zip解压，能省去好多问题。  
+> Flutter低版本抓紧升级，不要用命令去升级Flutter，最好直接去官网下载zip解压，能省去好多问题。  
 > Gradle版本5.4.1，Gradle Plugin版本3.4.1。
 
  
 ## 快速接入
-> 无需关心是否集成FlutterBoost   
-
-> 无需关心FlutterPatch类
-
-> 无需在Flutter初始化后编写 `FlutterPatch.flutterPatchInit(this);`  
 
 > 新增Sophix支持Flutter热更新 
 
@@ -53,7 +48,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
    dependencies下
 
 	```
-	classpath 'com.github.magicbaby810:hannibal:1.0.7.3'
+	classpath 'com.github.magicbaby810:hannibal:1.0.9'
 	```
 	
 	如果纯flutter项目换成这个，其他不变
@@ -69,7 +64,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
    dependencies下
 
 	```
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.7'
+	implementation files('libs/flutterpatch.aar')
 	```
 	
    另外说明，纯flutter项目，自动生成的tinkerId会出现补丁和基准包的id不一致，所以请各位自行设置tinkerId，
@@ -113,11 +108,11 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	![image](https://github.com/magicbaby810/HotfixFlutter/blob/master/screenshot/QQ20200624-180051@2x.png)
 	
 	
-3. 在app的gradle里，配置下面flutter、flutterboost，以及flutterpatch的依赖，再次Sync Now。
+3. 在app的gradle里，配置下面flutter，以及flutterpatch的依赖，再次Sync Now。
 
 	```
 	implementation project(':flutter')
-	implementation 'com.sk.flutterpatch:flutterpatch:0.0.7'
+	implementation files('libs/flutterpatch.aar')
    ```
    如果要测试flutterpatch，在flutterpatch模块的gradle里配置如下
 
