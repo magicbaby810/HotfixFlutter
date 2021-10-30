@@ -171,6 +171,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 <br/>
 <br/>
 
+大家在使用的时候有什么问题，都可以来 麻花疼：1151212481 找我咨询
 
 ### 鸣谢
 [带你不到80行代码搞定Flutter热更新](https://cloud.tencent.com/developer/article/1531498)
