@@ -88,7 +88,7 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
       public void onCreate() {
           super.onCreate();
           FlutterMain.startInitialization(this);
-          Bugly.init(this, "81817dea9c", true);
+          Bugly.init(this, "xxxxxxx", true);
       }
       
      	
