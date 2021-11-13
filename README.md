@@ -81,6 +81,17 @@ Native项目可以接入Tinker进行热更新，而且有Bugly做为补丁版本
 	tinkerId = "1.0.0-base"
 	//    autoGenerateTinkerId = true
 	```
+3. 混合开发的注意下，记得在Application里初始化Flutter，不知道放哪可以看demo 
+
+	```
+	@Override
+      public void onCreate() {
+          super.onCreate();
+          FlutterMain.startInitialization(this);
+          Bugly.init(this, "81817dea9c", true);
+      }
+      
+     	
 
 <br/>
 
