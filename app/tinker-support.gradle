@@ -5,7 +5,7 @@ def bakPath = file("${buildDir}/bakApk/")
 /**
  * 此处填写每次构建生成的基准包目录
  */
-def baseApkDir = "app-0118-18-10-50"
+def baseApkDir = "app-0508-11-48-01"
 
 /**
  * 对于插件各参数的详细解析请参考

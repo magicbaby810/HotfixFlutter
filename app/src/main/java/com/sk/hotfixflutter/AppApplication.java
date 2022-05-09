@@ -81,9 +81,8 @@ public class AppApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-//        initFlutterBoost();
         FlutterMain.startInitialization(this);
-        Bugly.init(this, "你的bugly id", true);
+        Bugly.init(this, "xxxxxx", true);
     }
 
     //配置flutterboost

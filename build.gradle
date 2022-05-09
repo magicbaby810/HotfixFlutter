@@ -5,6 +5,7 @@ buildscript {
         mavenCentral()
         maven { url 'https://jitpack.io' }
 
+        maven{ url 'https://maven.aliyun.com/repository/gradle-plugin'}
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://maven.aliyun.com/repository/google/' }
         maven { url 'https://maven.aliyun.com/repository/jcenter/' }
@@ -14,9 +15,9 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:3.4.1"
 
-        classpath 'com.tencent.bugly:tinker-support:1.1.5'
+        classpath 'com.tencent.bugly:tinker-support:1.2.3'
 
-        classpath 'com.github.magicbaby810:hannibal:1.0.7.3'
+        classpath 'com.github.magicbaby810:hannibal:1.0.9'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -28,11 +29,12 @@ allprojects {
         mavenCentral()
         maven { url 'https://jitpack.io' }
 
+        maven{ url 'https://maven.aliyun.com/repository/gradle-plugin'}
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://maven.aliyun.com/repository/google/' }
         maven { url 'https://maven.aliyun.com/repository/jcenter/' }
         maven { url 'http://download.flutter.io' }
-        maven { url 'https://dl.bintray.com/magicbaby/maven' }
+//        maven { url 'https://dl.bintray.com/magicbaby/maven' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/releases/' }
     }
 }
