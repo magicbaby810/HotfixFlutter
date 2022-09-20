@@ -16,7 +16,7 @@ buildscript {
 
         classpath 'com.tencent.bugly:tinker-support:1.1.5'
 
-        classpath 'com.github.magicbaby810:hannibal:1.0.7.3'
+        classpath 'com.github.magicbaby810:hannibal:1.0.9'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
